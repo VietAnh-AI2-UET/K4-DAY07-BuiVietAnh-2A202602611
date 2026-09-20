@@ -1,7 +1,7 @@
 # Báo Cáo Nhóm — Lab 7: Embedding & Vector Store
 
 **Nhóm:** Happy
-**Thành viên:** Bùi Việt Anh, Đinh Đức Long, Võ Thành Danh, Hà Anh Tuấn
+**Thành viên:** Bùi Việt Anh, Đinh Đức Long, Võ Công Danh, Hà Anh Tuấn
 **Ngày:** 20/9/2026
 
 > **Nộp 1 bản / nhóm.** Phần cá nhân (hướng tiếp cận, kết quả riêng, dự đoán…) mỗi thành viên nộp riêng trong `REPORT_CANHAN.md`. Chi tiết thang điểm: `docs/SCORING.md`.
@@ -85,7 +85,7 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 - **Mô tả & lý do chọn:** (Cùng lựa chọn với Thành viên 1) Phân rã văn bản đệ quy theo thứ tự dấu phân cách (`\n\n`, `\n`, `. `). Cắt theo cách này mô phỏng khá tốt cấu trúc logic của văn bản mà không cần xử lý ngôn ngữ tự nhiên quá sâu.
 - **Code snippet (nếu custom):** (Sử dụng lớp `RecursiveChunker` có sẵn)
 
-**Thành viên 4 — Võ Thành Danh**
+**Thành viên 4 — Võ Công Danh**
 - **Loại chiến lược:** FixedSizeChunker
 - **Mô tả & lý do chọn:** Cắt văn bản cơ học theo một số lượng ký tự cố định (như 500 ký tự) có kèm theo phần gối đầu (overlap). Đây là chiến lược đơn giản, dễ cài đặt và đảm bảo các khối văn bản (chunk) luôn đồng đều về kích thước.
 - **Code snippet (nếu custom):** (Sử dụng lớp `FixedSizeChunker` có sẵn)
@@ -97,7 +97,7 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 | Bùi Việt Anh | RecursiveChunker | 1/10 | Giữ được trọn vẹn câu/đoạn, không cắt ngang chữ | Vẫn có thể tách rời nội dung một mục nếu mục đó dài quá chunk_size |
 | Hà Anh Tuấn | SentenceChunker | 4/10 (Đúng 2/5 câu) | Đảm bảo không bao giờ bị đứt nửa câu, bảo toàn trọn vẹn ngữ pháp từng câu | Làm mất ngữ cảnh rộng (mất tiêu đề), đoạn văn bị nát vụn nếu điều khoản quá dài |
 | Đinh Đức Long | RecursiveChunker | 1/10 (Đúng 1/5 câu) | Giữ được cấu trúc đoạn và câu linh hoạt so với các cách cắt cứng | Kết quả (1/10) phản ánh nhược điểm trầm trọng của việc dùng Mock Embeddings |
-| Võ Thành Danh | FixedSizeChunker | 8/10 (Đúng 4/5 câu) | Đảm bảo các chunk có dung lượng đồng đều, dễ kiểm soát token LLM | Dễ cắt ngang một câu làm câu bị đứt đoạn, phá vỡ ngữ pháp và mất ngữ cảnh |
+| Võ Công Danh | FixedSizeChunker | 8/10 (Đúng 4/5 câu) | Đảm bảo các chunk có dung lượng đồng đều, dễ kiểm soát token LLM | Dễ cắt ngang một câu làm câu bị đứt đoạn, phá vỡ ngữ pháp và mất ngữ cảnh |
 
 **Chiến lược nào tốt nhất cho chủ đề này? Tại sao?**
 > *Về mặt logic, RecursiveChunker là chiến lược tốt nhất cho bộ dữ liệu chính sách Shopee. Các văn bản điều khoản có cấu trúc phân tầng tự nhiên, việc cắt đệ quy theo đoạn văn (`\n\n`) và câu (`. `) giúp bảo toàn nguyên vẹn từng quy định, không làm đứt đoạn ý nghĩa như FixedSizeChunker. Tuy nhiên, kết quả thực tế trên công cụ benchmark bị sai lệch do nhóm đang dùng Mock Embeddings, khiến điểm số của FixedSizeChunker cao bất thường một cách ngẫu nhiên.*
